@@ -85,8 +85,8 @@ class consulting_summary_stats:
         cat_stats = []
 
         for col in self.cat_vars:
-            temp_count = df[self.cat_vars][col].value_counts()
-            temp_pct = df[self.cat_vars][col].value_counts(normalize=True)
+            temp_count = self.data[self.cat_vars][col].value_counts()
+            temp_pct = self.data[self.cat_vars][col].value_counts(normalize=True)
             temp_df = pd.concat([temp_count, temp_pct], axis=1).reset_index()
             temp_df.columns = ['Variable', 'Count', 'Percent']
 
@@ -102,7 +102,7 @@ class consulting_summary_stats:
 
         for i, j in enumerate(self.cont_vars):
             plt.subplot(n_rows, 2, i + 1)
-            sns.histplot(df[j])
+            sns.histplot(self.data[j])
 
         self.create_folder('plots')
         plt.savefig('./results/plots/full_figure.png')
